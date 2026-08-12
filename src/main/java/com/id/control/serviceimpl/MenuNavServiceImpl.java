@@ -8,7 +8,6 @@ import com.id.control.exception.BadRequestException;
 import com.id.control.exception.NotFoundException;
 import com.id.control.repository.MenuNavRepository;
 import com.id.control.service.MenuNavService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.id.control.repository.SubmenuNavRepository;
 import com.id.control.util.Response;
@@ -20,12 +19,14 @@ import java.util.List;
  */
 @Service
 public class MenuNavServiceImpl implements MenuNavService {
-    
-    @Autowired
-    private MenuNavRepository menuNavRepository;
-    
-    @Autowired
-    private SubmenuNavRepository submenuNavRepository;
+
+    private final MenuNavRepository menuNavRepository;
+    private final SubmenuNavRepository submenuNavRepository;
+
+    public MenuNavServiceImpl(MenuNavRepository menuNavRepository, SubmenuNavRepository submenuNavRepository) {
+        this.menuNavRepository = menuNavRepository;
+        this.submenuNavRepository = submenuNavRepository;
+    }
 
     //Guardar
     @Override
@@ -54,7 +55,7 @@ public class MenuNavServiceImpl implements MenuNavService {
                 updateMenu.setEstatus(true); //Por defecto al actualizar es activo.
                 menuNavRepository.save(updateMenu);
             }
-            
+
         }
     }
 
@@ -72,16 +73,16 @@ public class MenuNavServiceImpl implements MenuNavService {
                 updateEstatus.setEstatus(true);
                 menuNavRepository.save(updateEstatus);
             }
-            
+
         }
-        
+
     }
 
     //Eliminar registro
     @Override
     public void deleteMenu(Integer idMenu) {
         menuNavRepository.deleteById(idMenu);
-        
+
     }
 
     //***************************** SERVICIOS - SUBMENU ***************************
@@ -128,7 +129,7 @@ public class MenuNavServiceImpl implements MenuNavService {
                 updateSubmenu.setEstatus(true); //Por defecto al actualizar es activo.
                 submenuNavRepository.save(updateSubmenu);
             }
-            
+
         }
     }
 
@@ -146,7 +147,7 @@ public class MenuNavServiceImpl implements MenuNavService {
                 updateEstatus.setEstatus(true);
                 submenuNavRepository.save(updateEstatus);
             }
-            
+
         }
     }
 

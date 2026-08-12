@@ -10,8 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,17 +23,17 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @author marco-romero
  */
 @Component
-@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+    private final UsuarioService usuarioService;
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsServiceImpl;
-
-    @Autowired
-    private UsuarioService usuarioService;
+    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsServiceImpl userDetailsServiceImpl, UsuarioService usuarioService) {
+        this.jwtService = jwtService;
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
+        this.usuarioService = usuarioService;
+    }
 
     //Variables de properties
     @Value("${security.api.header}")

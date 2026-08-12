@@ -4,7 +4,6 @@ import com.id.control.dto.TrabajadorDTO;
 import com.id.control.exception.ApiResponse;
 import com.id.control.service.TrabajadorService;
 import com.id.control.util.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/trabajador")
 public class TrabajadorController {
 
-    @Autowired
-    private TrabajadorService trabajadorService;
+    private final TrabajadorService trabajadorService;
+
+    public TrabajadorController(TrabajadorService trabajadorService) {
+        this.trabajadorService = trabajadorService;
+    }
 
     @PostMapping("/registrar")
     public ResponseEntity<ApiResponse<Response>> saveTrabajador(@RequestBody TrabajadorDTO trabajadorDTO) {

@@ -2,8 +2,6 @@ package com.id.control.config;
 
 import com.id.control.security.JwtAuthenticationFilter;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,14 +21,15 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
  */
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthenticationProvider authenticationProvider;
 
-    @Autowired
-    private AuthenticationProvider authenticationProvider;
+    public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter, AuthenticationProvider authenticationProvider) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.authenticationProvider = authenticationProvider;
+    }
 
     //Variables de CORS
     @Value("#{'${spring.web.cors.allowed-origins}'.split(',')}")

@@ -15,7 +15,6 @@ import com.id.control.service.UsuarioService;
 import com.id.control.util.Response;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,20 +27,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioSeguridadRepository usuarioSeguridadRepository;
+    private final TrabajadorRepository trabajadorRepository;
+    private final CatEstatusUsuarioRepository catEstatusUsuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UsuarioSeguridadRepository usuarioSeguridadRepository;
-
-    @Autowired
-    private TrabajadorRepository trabajadorRepository;
-
-    @Autowired
-    private CatEstatusUsuarioRepository catEstatusUsuarioRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, UsuarioSeguridadRepository usuarioSeguridadRepository, TrabajadorRepository trabajadorRepository, CatEstatusUsuarioRepository catEstatusUsuarioRepository, PasswordEncoder passwordEncoder) {
+        this.usuarioRepository = usuarioRepository;
+        this.usuarioSeguridadRepository = usuarioSeguridadRepository;
+        this.trabajadorRepository = trabajadorRepository;
+        this.catEstatusUsuarioRepository = catEstatusUsuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     //Register a user
     @Override

@@ -28,6 +28,7 @@
     </scm>
     <properties>
         <java.version>25</java.version>
+        <lombok.version>1.18.46</lombok.version>
     </properties>
     <dependencies>
         <dependency>
@@ -89,10 +90,12 @@
             <version>0.13.0</version>
         </dependency>
         <!-- Dependencia de anotaciones -->
+        <!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -129,12 +132,12 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.42</version>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                    <compilerArgs>
+                    <!--                    <compilerArgs>
                         <arg>-Xlint</arg>
-                    </compilerArgs>
+                    </compilerArgs>-->
                 </configuration>
             </plugin>
             

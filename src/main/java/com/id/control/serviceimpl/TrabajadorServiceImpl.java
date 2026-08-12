@@ -9,7 +9,6 @@ import com.id.control.service.TrabajadorService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,11 +18,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class TrabajadorServiceImpl implements TrabajadorService {
 
-    @Autowired
-    private TrabajadorRepository trabajadorRepository;
+    private final TrabajadorRepository trabajadorRepository;
+    private final PersonaRepository personaRepository;
 
-    @Autowired
-    private PersonaRepository personaRepository;
+    public TrabajadorServiceImpl(TrabajadorRepository trabajadorRepository, PersonaRepository personaRepository) {
+        this.trabajadorRepository = trabajadorRepository;
+        this.personaRepository = personaRepository;
+    }
 
     //Guardar nuevo trabajador
     @Override

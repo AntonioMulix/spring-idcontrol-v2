@@ -5,7 +5,6 @@ import com.id.control.dto.response.AuthenticationResponse;
 import com.id.control.entity.Usuario;
 import com.id.control.repository.UsuarioRepository;
 import com.id.control.service.JwtService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -17,14 +16,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    public AuthenticationServiceImpl(UsuarioRepository usuarioRepository, JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.usuarioRepository = usuarioRepository;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {

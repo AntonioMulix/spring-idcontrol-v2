@@ -4,7 +4,6 @@ import com.id.control.dto.request.RegistrationOptionsRequestDTO;
 import com.id.control.dto.response.RegistrationOptionsResponseDTO;
 import com.id.control.exception.ApiResponse;
 import com.id.control.service.PasskeyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/passkeys")
 public class PasskeyController {
 
-    @Autowired
-    private PasskeyService passkeyService;
+    private final PasskeyService passkeyService;
+
+    public PasskeyController(PasskeyService passkeyService) {
+        this.passkeyService = passkeyService;
+    }
 
     //AttestationOptions
     @PostMapping("/attestationOptions")

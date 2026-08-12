@@ -28,8 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 @SecurityRequirement(name = "bearerAuth")
 public class SubmenuNavController {
 
-    @Autowired
-    private MenuNavService menuNavService;
+    private final MenuNavService menuNavService;
+
+    public SubmenuNavController(MenuNavService menuNavService) {
+        this.menuNavService = menuNavService;
+    }
 
     /**
      * ==============================================================

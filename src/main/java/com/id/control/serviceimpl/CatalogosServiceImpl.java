@@ -8,7 +8,6 @@ import com.id.control.repository.CatEstatusUsuarioRepository;
 import com.id.control.repository.CatGeneroRepository;
 import com.id.control.service.CatalogosService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,11 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CatalogosServiceImpl implements CatalogosService {
 
-    @Autowired
-    private CatGeneroRepository catGeneroRepository;
+    private final CatGeneroRepository catGeneroRepository;
+    private final CatEstatusUsuarioRepository catEstatusUsuarioRepository;
 
-    @Autowired
-    private CatEstatusUsuarioRepository catEstatusUsuarioRepository;
+    public CatalogosServiceImpl(CatGeneroRepository catGeneroRepository, CatEstatusUsuarioRepository catEstatusUsuarioRepository) {
+        this.catGeneroRepository = catGeneroRepository;
+        this.catEstatusUsuarioRepository = catEstatusUsuarioRepository;
+    }
 
     /*===================================================================000
      CATALOGO GENERO

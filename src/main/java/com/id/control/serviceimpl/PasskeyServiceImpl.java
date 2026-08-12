@@ -11,7 +11,6 @@ import jakarta.transaction.Transactional;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -20,11 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 public class PasskeyServiceImpl implements PasskeyService {
 
-    @Autowired
-    private ChallengePasskeyRepository challengePasskeyRepository;
+    private final ChallengePasskeyRepository challengePasskeyRepository;
+    private final WebAuthnProperties webAuthnProperties;
 
-    @Autowired
-    private WebAuthnProperties webAuthnProperties;
+    public PasskeyServiceImpl(ChallengePasskeyRepository challengePasskeyRepository, WebAuthnProperties webAuthnProperties) {
+        this.challengePasskeyRepository = challengePasskeyRepository;
+        this.webAuthnProperties = webAuthnProperties;
+    }
 
     @Override
     @Transactional

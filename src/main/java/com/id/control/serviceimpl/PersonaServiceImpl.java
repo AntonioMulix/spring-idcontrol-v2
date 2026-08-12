@@ -6,7 +6,6 @@ import com.id.control.entity.Persona;
 import com.id.control.repository.CatGeneroRepository;
 import com.id.control.repository.PersonaRepository;
 import com.id.control.service.PersonaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,11 +15,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonaServiceImpl implements PersonaService {
 
-    @Autowired
-    private PersonaRepository personaRepository;
+    private final PersonaRepository personaRepository;
+    private final CatGeneroRepository catGeneroRepository;
 
-    @Autowired
-    private CatGeneroRepository catGeneroRepository;
+    public PersonaServiceImpl(PersonaRepository personaRepository, CatGeneroRepository catGeneroRepository) {
+        this.personaRepository = personaRepository;
+        this.catGeneroRepository = catGeneroRepository;
+    }
 
     @Override
     public void guardarPersona(PersonaDTO personaDTO) {
