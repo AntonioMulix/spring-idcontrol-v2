@@ -6,10 +6,6 @@ import com.id.control.service.MenuNavService;
 import com.id.control.util.Response;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-<<<<<<< HEAD
-=======
-import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> 2b8c0ea (Corrección de Respuestas API)
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
