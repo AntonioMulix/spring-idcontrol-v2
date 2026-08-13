@@ -15,15 +15,17 @@ public enum Response {
     CREDENCIALES_INCORRECTAS("Credenciales incorrectas"),
     CURP_NO_ENCONTRADA("CURP no encontrada"),
     DATOS_INVALIDOS("Datos inválidos"),
+    NOT_FOUND("No se encontraron resultados"),
     /*
      * Respuestas Personalizadas
      * Marco Romero 20-07-26
      */
     /* CATALOGOS */
     /*  MENÚ - NAVEGACIÓN*/
-    NOT_FOUND("No se encontraron resultados"),
+    MENU_ESTATUS_CHANGE("Cambio de estatus realizado."),
     /* SUBMENU - NAVEGACION */
-    MENU_NOT_FOUND("No hay resultados de el menu relacionado al submenu");
+    MENU_NOT_FOUND("No hay resultados de el menu relacionado al submenu"),
+    SUBMENU_ESTATUS_CHANGE("Cambio de estatus realizado.");
     private final String message;
 
     Response(String message) {

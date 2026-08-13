@@ -65,7 +65,7 @@ public class SubmenuNavController {
     @PostMapping("/estatus/{idSubmenu}")
     public ResponseEntity<ApiResponse<Response>> updateEstatus(@PathVariable Integer idSubmenu) {
         menuNavService.updateEstatusSubmenu(idSubmenu);
-        return ResponseEntity.ok(ApiResponse.ok(Response.OK));
+        return ResponseEntity.ok(ApiResponse.ok(Response.SUBMENU_ESTATUS_CHANGE.getMessage(), null));
     }
 
     //Eliminar registro
