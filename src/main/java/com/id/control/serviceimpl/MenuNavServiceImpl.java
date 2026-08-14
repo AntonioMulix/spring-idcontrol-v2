@@ -19,10 +19,10 @@ import java.util.List;
  */
 @Service
 public class MenuNavServiceImpl implements MenuNavService {
-
+    
     private final MenuNavRepository menuNavRepository;
     private final SubmenuNavRepository submenuNavRepository;
-
+    
     public MenuNavServiceImpl(MenuNavRepository menuNavRepository, SubmenuNavRepository submenuNavRepository) {
         this.menuNavRepository = menuNavRepository;
         this.submenuNavRepository = submenuNavRepository;
@@ -31,32 +31,94 @@ public class MenuNavServiceImpl implements MenuNavService {
     //Guardar
     @Override
     public void saveMenu(MenuNavDTO menuDTO) {
+        
         if (menuDTO == null) {
             throw new BadRequestException("No se ingresaron los datos");
-        } else {
-            MenuNav newMenu = new MenuNav();
-            newMenu.setDescripcion(menuDTO.getDescripcion());
-            newMenu.setEstatus(true); //Por defecto al crearlo es activo.
-            menuNavRepository.save(newMenu);
         }
+        
+        MenuNav findOrdenMenu = menuNavRepository.findLastOneOrder();
+        MenuNav existeNumOrden = menuNavRepository.findByOrderNum(menuDTO.getOrden());
+        
+        MenuNav newMenu = new MenuNav();
+        newMenu.setDescripcion(menuDTO.getDescripcion());
+        newMenu.setEstatus(true);
+
+        // Determinar el siguiente consecutivo
+        Integer siguienteOrden = 1;
+        
+        if (findOrdenMenu != null && findOrdenMenu.getOrden() != null) {
+            siguienteOrden = findOrdenMenu.getOrden() + 1;
+        }
+
+        // Si no se especificó orden, colocar el siguiente consecutivo
+        if (menuDTO.getOrden() == null) {
+            
+            newMenu.setOrden(siguienteOrden);
+            
+        } else if (existeNumOrden != null) {
+
+            // El nuevo menú toma el orden solicitado
+            newMenu.setOrden(menuDTO.getOrden());
+
+            // El menú que ya tenía ese orden pasa al final
+            existeNumOrden.setOrden(siguienteOrden);
+            
+            menuNavRepository.save(existeNumOrden);
+            
+        } else {
+
+            // El orden solicitado está disponible
+            newMenu.setOrden(menuDTO.getOrden());
+        }
+        
+        menuNavRepository.save(newMenu);
     }
 
     //Actualizar
     @Override
     public void updateMenu(Integer idMenu, MenuNavDTO menuDTO) {
+        
         if (menuDTO == null) {
             throw new BadRequestException("No se ingresaron datos");
-        } else {
-            MenuNav updateMenu = menuNavRepository.findById(idMenu).get();
-            if (updateMenu == null) {
-                throw new NotFoundException("No se encontraron resultados");
-            } else {
-                updateMenu.setDescripcion(menuDTO.getDescripcion());
-                updateMenu.setEstatus(true); //Por defecto al actualizar es activo.
-                menuNavRepository.save(updateMenu);
-            }
-
         }
+        
+        MenuNav updateMenu = menuNavRepository.findById(idMenu)
+                .orElseThrow(()
+                        -> new NotFoundException("No se encontraron resultados"));
+        
+        Integer nuevoOrden = menuDTO.getOrden();
+        Integer ordenAnterior = updateMenu.getOrden();
+        
+        MenuNav existeNumOrden = null;
+        
+        if (nuevoOrden != null) {
+            existeNumOrden = menuNavRepository.findByOrderNum(nuevoOrden);
+        }
+        
+        updateMenu.setDescripcion(menuDTO.getDescripcion());
+        updateMenu.setEstatus(true);
+
+        // El orden no cambió
+        if (nuevoOrden == null || nuevoOrden.equals(ordenAnterior)) {
+            
+            updateMenu.setOrden(ordenAnterior);
+            
+        } else if (existeNumOrden == null) {
+
+            // El nuevo orden está disponible
+            updateMenu.setOrden(nuevoOrden);
+            
+        } else {
+
+            // El nuevo orden pertenece a otro menú:
+            // intercambiar las posiciones.
+            existeNumOrden.setOrden(ordenAnterior);
+            updateMenu.setOrden(nuevoOrden);
+            
+            menuNavRepository.save(existeNumOrden);
+        }
+        
+        menuNavRepository.save(updateMenu);
     }
 
     //Cambiar estatus
@@ -73,16 +135,16 @@ public class MenuNavServiceImpl implements MenuNavService {
                 updateEstatus.setEstatus(true);
                 menuNavRepository.save(updateEstatus);
             }
-
+            
         }
-
+        
     }
 
     //Eliminar registro
     @Override
     public void deleteMenu(Integer idMenu) {
         menuNavRepository.deleteById(idMenu);
-
+        
     }
 
     //***************************** SERVICIOS - SUBMENU ***************************
@@ -106,6 +168,7 @@ public class MenuNavServiceImpl implements MenuNavService {
             newSubmenu.setDescripcion(subMenuNavDTO.getDescripcion());
             newSubmenu.setMenuNav(findMenu);
             newSubmenu.setEstatus(true); //Por defecto al crearlo es activo.
+            newSubmenu.setOrden(subMenuNavDTO.getOrden());
             submenuNavRepository.save(newSubmenu);
         }
     }
@@ -127,9 +190,10 @@ public class MenuNavServiceImpl implements MenuNavService {
                 updateSubmenu.setDescripcion(subMenuNavDTO.getDescripcion());
                 updateSubmenu.setMenuNav(findMenu);
                 updateSubmenu.setEstatus(true); //Por defecto al actualizar es activo.
+                updateSubmenu.setOrden(subMenuNavDTO.getOrden());
                 submenuNavRepository.save(updateSubmenu);
             }
-
+            
         }
     }
 
@@ -147,7 +211,7 @@ public class MenuNavServiceImpl implements MenuNavService {
                 updateEstatus.setEstatus(true);
                 submenuNavRepository.save(updateEstatus);
             }
-
+            
         }
     }
 

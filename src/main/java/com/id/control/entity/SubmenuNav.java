@@ -29,15 +29,18 @@ public class SubmenuNav {
     private String descripcion;
     @Column(name = "estatus")
     private boolean estatus;
+    @Column(name = "orden")
+    private Integer orden;
 
     public SubmenuNav() {
     }
 
-    public SubmenuNav(Integer idSubmenuNav, MenuNav menuNav, String descripcion, boolean estatus) {
+    public SubmenuNav(Integer idSubmenuNav, MenuNav menuNav, String descripcion, boolean estatus, Integer orden) {
         this.idSubmenuNav = idSubmenuNav;
         this.menuNav = menuNav;
         this.descripcion = descripcion;
         this.estatus = estatus;
+        this.orden = orden;
     }
 
     public Integer getIdSubmenuNav() {
@@ -70,6 +73,14 @@ public class SubmenuNav {
 
     public void setEstatus(boolean estatus) {
         this.estatus = estatus;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
     }
 
 }

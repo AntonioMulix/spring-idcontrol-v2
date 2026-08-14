@@ -8,13 +8,15 @@ public class MenuNavDTO {
 
     private String descripcion;
     private boolean estatus;
+    private Integer orden;
 
     public MenuNavDTO() {
     }
 
-    public MenuNavDTO(String descripcion, boolean estatus) {
+    public MenuNavDTO(String descripcion, boolean estatus, Integer orden) {
         this.descripcion = descripcion;
         this.estatus = estatus;
+        this.orden = orden;
     }
 
     public String getDescripcion() {
@@ -31,6 +33,14 @@ public class MenuNavDTO {
 
     public void setEstatus(boolean estatus) {
         this.estatus = estatus;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
     }
 
 }
