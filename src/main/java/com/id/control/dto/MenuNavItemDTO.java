@@ -1,5 +1,7 @@
 package com.id.control.dto;
 
+import java.util.List;
+
 /**
  *
  * @author marco-romero
@@ -9,20 +11,18 @@ public class MenuNavItemDTO {
     private Integer idMenu;
     private String descripcionMenu;
     private boolean estatusMenu;
-    private Integer idSubmenu;
-    private String descripcionSubmenu;
-    private boolean estatusSubmenu;
+    private Integer ordenMenu;
+    private List<SubmenuNavDTO> submenus;
 
     public MenuNavItemDTO() {
     }
 
-    public MenuNavItemDTO(Integer idMenu, String descripcionMenu, boolean estatusMenu, Integer idSubmenu, String descripcionSubmenu, boolean estatusSubmenu) {
+    public MenuNavItemDTO(Integer idMenu, String descripcionMenu, boolean estatusMenu, Integer ordenMenu, List<SubmenuNavDTO> submenus) {
         this.idMenu = idMenu;
         this.descripcionMenu = descripcionMenu;
         this.estatusMenu = estatusMenu;
-        this.idSubmenu = idSubmenu;
-        this.descripcionSubmenu = descripcionSubmenu;
-        this.estatusSubmenu = estatusSubmenu;
+        this.ordenMenu = ordenMenu;
+        this.submenus = submenus;
     }
 
     public Integer getIdMenu() {
@@ -49,28 +49,20 @@ public class MenuNavItemDTO {
         this.estatusMenu = estatusMenu;
     }
 
-    public Integer getIdSubmenu() {
-        return idSubmenu;
+    public Integer getOrdenMenu() {
+        return ordenMenu;
     }
 
-    public void setIdSubmenu(Integer idSubmenu) {
-        this.idSubmenu = idSubmenu;
+    public void setOrdenMenu(Integer ordenMenu) {
+        this.ordenMenu = ordenMenu;
     }
 
-    public String getDescripcionSubmenu() {
-        return descripcionSubmenu;
+    public List<SubmenuNavDTO> getSubmenus() {
+        return submenus;
     }
 
-    public void setDescripcionSubmenu(String descripcionSubmenu) {
-        this.descripcionSubmenu = descripcionSubmenu;
-    }
-
-    public boolean isEstatusSubmenu() {
-        return estatusSubmenu;
-    }
-
-    public void setEstatusSubmenu(boolean estatusSubmenu) {
-        this.estatusSubmenu = estatusSubmenu;
+    public void setSubmenu(List<SubmenuNavDTO> submenus) {
+        this.submenus = submenus;
     }
 
 }

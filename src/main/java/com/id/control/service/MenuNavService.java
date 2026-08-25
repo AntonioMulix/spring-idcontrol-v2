@@ -1,6 +1,7 @@
 package com.id.control.service;
 
 import com.id.control.dto.MenuNavDTO;
+import com.id.control.dto.MenuNavItemDTO;
 import com.id.control.dto.SubmenuNavDTO;
 import com.id.control.entity.SubmenuNav;
 import java.util.List;
@@ -23,6 +24,9 @@ public interface MenuNavService {
 
     //Eliminar Menu
     public void deleteMenu(Integer idMenu);
+
+    //Listar Menu
+    public List<MenuNavItemDTO> listAllMenu();
 
     //******************************** SUBMENU-NAV *****************************
     //Listar todo Menu y Submenu

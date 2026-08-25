@@ -1,6 +1,8 @@
 package com.id.control.repository;
 
+import com.id.control.dto.MenuNavItemDTO;
 import com.id.control.entity.MenuNav;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,4 +29,11 @@ public interface MenuNavRepository extends JpaRepository<MenuNav, Integer> {
            """)
     public MenuNav findByOrderNum(@Param("orden") Integer orden);
 
+    @Query("""
+    SELECT DISTINCT menu
+    FROM MenuNav menu
+    LEFT JOIN FETCH menu.submenus
+    ORDER BY menu.orden
+    """)
+    List<MenuNav> findAllMenusWithSubmenus();
 }
