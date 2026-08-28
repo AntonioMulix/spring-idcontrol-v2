@@ -23,6 +23,10 @@ public class MenuNav {
     private Integer idMenuNav;
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "url")
+    private String url;
+    @Column(name = "icon")
+    private String icon;
     @Column(name = "estatus")
     private boolean estatus;
     @Column(name = "orden")
@@ -33,9 +37,11 @@ public class MenuNav {
     public MenuNav() {
     }
 
-    public MenuNav(Integer idMenuNav, String descripcion, boolean estatus, Integer orden, List<SubmenuNav> submenus) {
+    public MenuNav(Integer idMenuNav, String descripcion, String url, String icon, boolean estatus, Integer orden, List<SubmenuNav> submenus) {
         this.idMenuNav = idMenuNav;
         this.descripcion = descripcion;
+        this.url = url;
+        this.icon = icon;
         this.estatus = estatus;
         this.orden = orden;
         this.submenus = submenus;
@@ -55,6 +61,22 @@ public class MenuNav {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public boolean isEstatus() {

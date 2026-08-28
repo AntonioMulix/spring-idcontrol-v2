@@ -10,6 +10,8 @@ public class MenuNavItemDTO {
 
     private Integer idMenu;
     private String descripcionMenu;
+    private String urlMenu;
+    private String iconMenu;
     private boolean estatusMenu;
     private Integer ordenMenu;
     private List<SubmenuNavDTO> submenus;
@@ -17,9 +19,11 @@ public class MenuNavItemDTO {
     public MenuNavItemDTO() {
     }
 
-    public MenuNavItemDTO(Integer idMenu, String descripcionMenu, boolean estatusMenu, Integer ordenMenu, List<SubmenuNavDTO> submenus) {
+    public MenuNavItemDTO(Integer idMenu, String descripcionMenu, String urlMenu, String iconMenu, boolean estatusMenu, Integer ordenMenu, List<SubmenuNavDTO> submenus) {
         this.idMenu = idMenu;
         this.descripcionMenu = descripcionMenu;
+        this.urlMenu = urlMenu;
+        this.iconMenu = iconMenu;
         this.estatusMenu = estatusMenu;
         this.ordenMenu = ordenMenu;
         this.submenus = submenus;
@@ -39,6 +43,22 @@ public class MenuNavItemDTO {
 
     public void setDescripcionMenu(String descripcionMenu) {
         this.descripcionMenu = descripcionMenu;
+    }
+
+    public String getUrlMenu() {
+        return urlMenu;
+    }
+
+    public void setUrlMenu(String urlMenu) {
+        this.urlMenu = urlMenu;
+    }
+
+    public String getIconMenu() {
+        return iconMenu;
+    }
+
+    public void setIconMenu(String iconMenu) {
+        this.iconMenu = iconMenu;
     }
 
     public boolean isEstatusMenu() {
@@ -61,7 +81,7 @@ public class MenuNavItemDTO {
         return submenus;
     }
 
-    public void setSubmenu(List<SubmenuNavDTO> submenus) {
+    public void setSubmenus(List<SubmenuNavDTO> submenus) {
         this.submenus = submenus;
     }
 
