@@ -43,4 +43,17 @@ public interface MenuNavService {
 
     //Eliminar Submenu
     public void deleteSubmenu(Integer idSubmenu);
+
+    // ******************************** MENU(opciones) - ROLES ***************************
+    // Listar submenus por roles
+//    public List<SubmenuNav> listByRolUser();
+
+    // Guardar(vincular) menus con roles
+//    public void saveSubmenuRol();
+
+    // Update(vincular) menus con roles
+//    public void updateSubmenuRol();
+
+    // Delete menu con rol
+//    public void deleteMenuRol();
 }

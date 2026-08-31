@@ -262,4 +262,11 @@ public class MenuNavServiceImpl implements MenuNavService {
         }
         menuNavRepository.deleteById(idSubmenu);
     }
+    
+    
+    
+    // ******************************** MENU - ROLES ***************************
+    
+    // Listar submenu
+//    public List<SubmenuNav> listByRolUser();
 }
